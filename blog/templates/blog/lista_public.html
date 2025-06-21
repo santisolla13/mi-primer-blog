@@ -1,64 +1,57 @@
-<html>
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
 <head>
-    <title>Blog del profe Jorge</title>
-    <h1>¡Hola! La plantilla funciona</h1>
-    <style>
-        .filtro-usuarios {
-            margin: 15px 0;
-            padding: 10px;
-            background: #f0f0f0;
-        }
-        .usuario-filtro {
-            display: inline-block;
-            margin-right: 10px;
-            padding: 5px 10px;
-            background: #e0e0e0;
-            border-radius: 3px;
-        }
-        .usuario-filtro.activo {
-            background: #4CAF50;
-            color: white;
-        }
-        .limpiar-filtro {
-            display: inline-block;
-            margin-left: 10px;
-            color: #666;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <title>Blog UFC</title>
+    <link rel="stylesheet" href="{% static 'blog/estilos.css' %}">
 </head>
 <body>
-    <div style="background: red;">
-        <h1><a href="/">Blog del profe Jorge</a></h1>
+    <h1>Peleadores de UFC</h1>
+    <div class="banner-ufc">
+        <img src="https://www.sportsnet.ca/wp-content/uploads/2024/12/Ilia-Topuria-holds-rose-while-reacting-to-UFC-308-victory.jpg" alt="Ilia Topuria UFC 308">
     </div>
-    <!-- Filtro por usuario usando enlaces -->
-    <div class="filtro-usuarios">
-    <strong>Filtrar por autor:</strong>
-   
-    <!-- Opción "Todos" -->
-    <a href="?" class="usuario-filtro {% if not usuario_activo %}activo{% endif %}">
-        Todos
-    </a>
-   
-    <!-- Opciones por usuario -->
-    {% for usuario in usuarios %}
-        <a href="?usuario={{ usuario.id }}"
-           class="usuario-filtro {% if usuario_activo == usuario.id %}activo{% endif %}">
-            {{ usuario.username }}
-        </a>
-    {% endfor %}
-   </div>
-
-   <!-- Lista de publicaciones -->
-
-   <div>
-    {% for publicacion in publicaciones %}
-    <div>
-        <p> publicado: {{ publicacion.fecha_publicacion }}</p>
-        <h2><a href="">{{ publicacion.titulo }}</a></h2>
-        <p>{{ publicacion.texto|linebreaksbr }}</p>
-        <hr>
+    <div class="contenedor-principal">
+        {% for publicacion in publicaciones %}
+        <div class="card"
+            onmouseover="playSound('{{ publicacion.nombre|slugify }}')" 
+            onmouseout="stopSound('{{ publicacion.nombre|slugify }}')">
+            <img src="{{ publicacion.imagen }}" alt="{{ publicacion.nombre }}" class="imagen-peleador">
+            <div class="contenido">
+                <h2>{{ publicacion.nombre }}</h2>
+                <p><strong>Apodo:</strong> {{ publicacion.apodo }}</p>
+                <p><strong>Edad:</strong> {{ publicacion.edad }}</p>
+                <p><strong>Altura:</strong> {{ publicacion.altura }}</p>
+                <p><strong>Peso:</strong> {{ publicacion.peso }}</p>
+                <p><strong>País:</strong> {{ publicacion.pais }}</p>
+                <p><strong>Categoría:</strong> {{ publicacion.categoria }}</p>
+                <p><strong>Récord:</strong> {{ publicacion.record }}</p>
+                <p><strong>Títulos/defensas:</strong> {{ publicacion.titulos }}</p>
+                <p class="descripcion">{{ publicacion.descripcion }}</p>
+            </div>
+            <!-- AUDIO -->
+            <audio id="{{ publicacion.nombre|slugify }}" 
+            src="{% static 'blog/songs/' %}{{ publicacion.nombre|slugify }}.mp3">
+            </audio>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-   </div>
+    <script>
+        function playSound(id) {
+            const audio = document.getElementById(id);
+            if (audio) {
+                audio.currentTime = 0;
+                audio.play();
+            }
+        }
+    
+        function stopSound(id) {
+            const audio = document.getElementById(id);
+            if (audio) {
+                audio.pause();
+                audio.currentTime = 0;
+            }
+        }
+    </script>    
 </body>
 </html>

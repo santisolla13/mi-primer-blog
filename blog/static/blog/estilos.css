@@ -1,0 +1,83 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #222;
+    margin-bottom: 40px;
+}
+
+.contenedor-principal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.card {
+    background-color: white;
+    display: flex;
+    gap: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 100%;
+    padding: 20px;
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: scale(1.02);
+}
+
+.imagen-peleador {
+    width: 280px;
+    height: 450px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contenido {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+}
+
+.contenido h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #111;
+}
+
+.contenido p {
+    margin: 5px 0;
+    color: #444;
+}
+
+.descripcion {
+    margin-top: 10px;
+    font-style: italic;
+    color: #666;
+}
+.banner-ufc {
+    width: 100%;
+    max-width: 800px;
+    height: 300px;
+    margin: 30px auto;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.banner-ufc img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
